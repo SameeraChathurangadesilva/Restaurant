@@ -16,28 +16,29 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class DialogTest extends AppCompatActivity {
 
-    public Toolbar toolbar;
-    private TextView txtSetItemSizePrice,totalPrice;
+    private Toolbar toolbar;
+    private TextView txtSetItemSizePrice, totalPrice;
     private Button btnAddToOrder;
     private RadioGroup radioGroupSizes;
-    private RadioButton ppprice,mprice,lprice;
+    private RadioButton ppprice, mprice, lprice;
     private EditText qty;
     private Context context;
+    private Intent mpriceIntent;
+    private String quantiy;
+    private Double quantiyDouble;
+    private String itemprice;
+    private Double itempriceDouble;
+    private Double total;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog_test);
-        this.context=this;
+        this.context = this;
 
         btnAddToOrder = findViewById(R.id.btnAddToOrder);
         ppprice = findViewById(R.id.PPprice);
@@ -72,26 +73,66 @@ public class DialogTest extends AppCompatActivity {
                 switch (checkedId) {
                     case R.id.PPprice:
                         // do operations specific to this selection
-                        Intent pppriceIntent = getIntent();
-                        String pppricevalue = pppriceIntent.getStringExtra("PPprice");
+                        mpriceIntent = getIntent();
+                        String pppricevalue = mpriceIntent.getStringExtra("PPprice");
                         txtSetItemSizePrice = findViewById(R.id.txtSetItemSizePrice);
                         txtSetItemSizePrice.setText(pppricevalue);
+
+
+                        try {
+                            txtSetItemSizePrice = findViewById(R.id.txtSetItemSizePrice);
+                            totalPrice = findViewById(R.id.txtTotal);
+                            quantiy = qty.getText().toString();
+                            quantiyDouble = Double.valueOf(quantiy).doubleValue();
+                            itemprice = txtSetItemSizePrice.getText().toString();
+                            itempriceDouble = Double.valueOf(itemprice).doubleValue();
+                            total = quantiyDouble * itempriceDouble;
+                            totalPrice.setText(String.valueOf(total));
+                        } catch (NumberFormatException ex) {
+
+                        }
+
                         break;
 
                     case R.id.Mprice:
                         // do operations specific to this selection
-                        Intent mpriceIntent = getIntent();
+                        mpriceIntent = getIntent();
                         String mprice = mpriceIntent.getStringExtra("Mprice");
                         txtSetItemSizePrice = findViewById(R.id.txtSetItemSizePrice);
                         txtSetItemSizePrice.setText(mprice);
+
+                        try {
+                            txtSetItemSizePrice = findViewById(R.id.txtSetItemSizePrice);
+                            totalPrice = findViewById(R.id.txtTotal);
+                            quantiy = qty.getText().toString();
+                            quantiyDouble = Double.valueOf(quantiy).doubleValue();
+                            itemprice = txtSetItemSizePrice.getText().toString();
+                            itempriceDouble = Double.valueOf(itemprice).doubleValue();
+                            total = quantiyDouble * itempriceDouble;
+                            totalPrice.setText(String.valueOf(total));
+                        } catch (NumberFormatException ex) {
+                        }
                         break;
 
                     case R.id.Lprice:
                         // do operations specific to this selection
-                        Intent lpriceIntent = getIntent();
-                        String lprice = lpriceIntent.getStringExtra("Lprice");
+                        mpriceIntent = getIntent();
+                        String lprice = mpriceIntent.getStringExtra("Lprice");
                         txtSetItemSizePrice = findViewById(R.id.txtSetItemSizePrice);
                         txtSetItemSizePrice.setText(lprice);
+
+                        try {
+                            txtSetItemSizePrice = findViewById(R.id.txtSetItemSizePrice);
+                            totalPrice = findViewById(R.id.txtTotal);
+                            quantiy = qty.getText().toString();
+                            quantiyDouble = Double.valueOf(quantiy).doubleValue();
+                            itemprice = txtSetItemSizePrice.getText().toString();
+                            itempriceDouble = Double.valueOf(itemprice).doubleValue();
+                            total = quantiyDouble * itempriceDouble;
+                            totalPrice.setText(String.valueOf(total));
+                        } catch (NumberFormatException ex) {
+
+                        }
                         break;
 
                 }
@@ -99,32 +140,34 @@ public class DialogTest extends AppCompatActivity {
         });
     }
 
-    public void setTotalPrice(){
+    public void setTotalPrice() {
 
-        qty =findViewById(R.id.txtQty);
+        qty = findViewById(R.id.txtQty);
 
         qty.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //here is your code
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // TODO Auto-generated method stub
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 // TODO Auto-generated method stub
                 try {
                     txtSetItemSizePrice = findViewById(R.id.txtSetItemSizePrice);
                     totalPrice = findViewById(R.id.txtTotal);
-                    String quantiy = qty.getText().toString();
-                    Double quantiyDouble= Double.valueOf(quantiy).doubleValue();
-                    String itemprice = txtSetItemSizePrice.getText().toString();
-                    Double itempriceDouble = Double.valueOf(itemprice).doubleValue();
-                    Double total = quantiyDouble*itempriceDouble;
+                    quantiy = qty.getText().toString();
+                    quantiyDouble = Double.valueOf(quantiy).doubleValue();
+                    itemprice = txtSetItemSizePrice.getText().toString();
+                    itempriceDouble = Double.valueOf(itemprice).doubleValue();
+                    total = quantiyDouble * itempriceDouble;
                     totalPrice.setText(String.valueOf(total));
-                }catch (NumberFormatException ex){
+                } catch (NumberFormatException ex) {
 
                 }
             }
@@ -138,28 +181,28 @@ public class DialogTest extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    Intent intent = new Intent(context,PlaceOrder.class);
+                    Intent intent = new Intent(context, PlaceOrder.class);
                     String pp = ppprice.getText().toString();
                     String m = mprice.getText().toString();
                     String l = lprice.getText().toString();
                     String quantiy = qty.getText().toString();
                     String total = totalPrice.getText().toString();
 
-                    intent.putExtra("PPprice",pp);
-                    intent.putExtra("Mprice",m);
-                    intent.putExtra("Lprice",l);
-                    intent.putExtra("Quantiy",quantiy);
-                    intent.putExtra("Total",total);
+                    intent.putExtra("PPprice", pp);
+                    intent.putExtra("Mprice", m);
+                    intent.putExtra("Lprice", l);
+                    intent.putExtra("Quantiy", quantiy);
+                    intent.putExtra("Total", total);
                     startActivity(intent);
 
                     SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
 
-                    editor.putString("Qty",qty.getText().toString());
-                    editor.putString("Price",totalPrice.getText().toString());
+                    editor.putString("Qty", qty.getText().toString());
+                    editor.putString("Price", totalPrice.getText().toString());
                     editor.apply();
 
-                }catch (NumberFormatException ex){
+                } catch (NumberFormatException ex) {
 
                 }
 
