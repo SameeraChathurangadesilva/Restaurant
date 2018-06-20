@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/search"
+        android:title="search"
+        android:orderInCategory="100"
+        android:icon="@drawable/search_24px"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/shoppingcard"
+        android:title="shoppingcard"
+        android:orderInCategory="100"
+        android:icon="@drawable/shopping_cart_24px"
+        app:showAsAction ="always"
+        />
+
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:orderInCategory="100"
+        app:showAsAction ="never"
+        />
+
+    <item
+        android:id="@+id/edit"
+        android:title="Edit"
+        android:orderInCategory="100"
+        app:showAsAction ="never"
+        />
+
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        android:orderInCategory="100"
+        app:showAsAction ="never"
+        />
+
+</menu>

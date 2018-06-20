@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainForm">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Material01"
+        android:minHeight="?attr/actionBarSize"
+        />
+
+    <TabHost
+        android:id="@+id/tabHost"
+        android:layout_below="@id/toolbarMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginTop="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    android:scrollbars="none" >
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+                    </TabWidget>
+
+                </HorizontalScrollView>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scrollbars="vertical"
+                android:layout_alignParentTop="true">
+
+                <include
+                    android:layout_marginTop="50dp"
+                    android:id="@+id/layout01"
+                    layout="@layout/activity_item01"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </include>
+
+                <include
+                    android:layout_marginTop="60dp"
+                    android:id="@+id/layout02"
+                    layout="@layout/activity_item02"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </include>
+
+                <include
+                    android:id="@+id/layout03"
+                    layout="@layout/activity_item03"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </include>
+
+                <include
+                    android:id="@+id/layout04"
+                    layout="@layout/activity_item04"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </include>
+
+                <include
+                    android:id="@+id/layout05"
+                    layout="@layout/activity_item05"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </include>
+
+            </FrameLayout>
+        </RelativeLayout>
+    </TabHost>
+
+
+</RelativeLayout>

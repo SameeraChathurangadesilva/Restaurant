@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Restaurant</string>
+
+
+    <string name="app_name1">Pasta</string>
+    <string name="app_name2">Pasta</string>
+    <string name="app_name3">Pasta</string>
+
+    <!--Dialog form -->
+    <!--=================Radio button============-->
+    <string name="ppsize">PP Size</string>
+    <string name="msize">M Size</string>
+    <string name="lsize">L Size</string>
+    <!--=================button============-->
+    <string name="ok">ADD TO ORDER</string>
+
+</resources>
