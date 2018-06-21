@@ -4,17 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DialogTest extends AppCompatActivity {
@@ -195,12 +202,18 @@ public class DialogTest extends AppCompatActivity {
                     intent.putExtra("Total", total);
                     startActivity(intent);
 
-                    SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
 
-                    editor.putString("Qty", qty.getText().toString());
-                    editor.putString("Price", totalPrice.getText().toString());
-                    editor.apply();
+                    ArrayList<String> listSave=new ArrayList<>();
+                    listSave.add(quantiy);
+                    listSave.add(totalPrice+"");
+                    saveArrayList(listSave,"key");
+                    Log.e("saveArrayList:","Save ArrayList success");
+//                    SharedPreferences pref = getSharedPreferences("MyPref", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = pref.edit();
+//
+//                    editor.putString("Qty", qty.getText().toString());
+//                    editor.putString("Price", totalPrice.getText().toString());
+//                    editor.apply();
 
                 } catch (NumberFormatException ex) {
 
@@ -208,5 +221,14 @@ public class DialogTest extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void saveArrayList(ArrayList<String> list,String key){
+        SharedPreferences prefs = getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        editor.putString(key, json);
+        editor.apply();     // This line is IMPORTANT !!!
     }
 }
